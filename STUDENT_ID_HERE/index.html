@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Transistors to Qubits | Hybrid Learning Framework</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Top Navigation & Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-group">
+        <div class="logo-icon">
+          <span class="icon-transistor">⚡</span>
+          <span class="icon-arrow">➔</span>
+          <span class="icon-qubit">Ψ</span>
+        </div>
+        <div>
+          <h1>From Transistors to Qubits</h1>
+          <p class="subtitle">A Hybrid Semiconductor-to-Quantum Learning Framework | CSE University Platform</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-primary">University CSE Project</span>
+        <span class="badge badge-accent">Qiskit Compatible</span>
+        <button id="themeToggleBtn" class="btn btn-secondary btn-sm" title="Toggle Light/Dark Theme">🌓 Theme</button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="main-nav">
+      <button class="nav-tab active" data-tab="tab-levels">📚 4 Learning Levels</button>
+      <button class="nav-tab" data-tab="tab-module-a">⚡ Module A: Transistor Lab</button>
+      <button class="nav-tab" data-tab="tab-module-b">🔀 Module B: Logic Gates</button>
+      <button class="nav-tab" data-tab="tab-module-c">⚛️ Module C: Quantum Simulator</button>
+      <button class="nav-tab" data-tab="tab-module-d">📊 Module D: Comparison Matrix</button>
+      <button class="nav-tab" data-tab="tab-noise">📡 Noise & Error Correction</button>
+      <button class="nav-tab" data-tab="tab-evaluation">📝 Evaluation & Tests</button>
+    </nav>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+
+    <!-- =================================================================== -->
+    <!-- TAB 1: 4 LEARNING LEVELS -->
+    <!-- =================================================================== -->
+    <section id="tab-levels" class="tab-pane active">
+      <div class="section-intro">
+        <h2>Transistor-to-Qubit Pedagogical Journey</h2>
+        <p>A progressive 4-level bridge mapping physical semiconductor switching to linear algebra and quantum states.
+        </p>
+      </div>
+
+      <!-- Level Selector Pills -->
+      <div class="level-pills">
+        <button class="level-pill active" data-level="1">Level 1: Transistor Switch</button>
+        <button class="level-pill" data-level="2">Level 2: Logic Gate vs Pauli-X</button>
+        <button class="level-pill" data-level="3">Level 3: Classical Bit ➔ Qubit</button>
+        <button class="level-pill" data-level="4">Level 4: Classical vs Quantum Circuit</button>
+      </div>
+
+      <!-- LEVEL 1 CONTENT -->
+      <div id="level-content-1" class="level-view active card">
+        <div class="grid-2col">
+          <div class="level-theory">
+            <span class="pill-tag">Level 1: Classical Bit Foundation</span>
+            <h3>The Semiconductor Electronic Switch</h3>
+            <p>Every classical digital computer is built upon transistors acting as electronic switches. When an input
+              voltage \(V_{in}\) is applied across the base-emitter (or gate-source) junction, it controls the flow of
+              electrons between collector and emitter.</p>
+
+            <div class="formula-box">
+              <strong>Semiconductor Transfer Condition:</strong>
+              <ul>
+                <li>\(V_{in} < V_{th}\ (0.7\text{V})\): <strong>Cut-Off Region</strong> &rarr; Transistor is OFF (Open
+                    Circuit) &rarr; \(I_C \approx 0\) &rarr; LED is OFF &rarr; <strong>Classical Bit 0</strong></li>
+                <li>\(V_{in} \ge V_{th}\ (0.7\text{V})\): <strong>Saturation Region</strong> &rarr; Transistor is ON
+                  (Short Circuit) &rarr; \(I_C\) maximum &rarr; LED is ON &rarr; <strong>Classical Bit 1</strong></li>
+              </ul>
+            </div>
+
+            <div class="interactive-controls">
+              <label for="l1-vin-slider">Input Control Voltage \(V_{in}\): <span id="l1-vin-val"
+                  class="highlight-val">0.00 V</span></label>
+              <input type="range" id="l1-vin-slider" min="0" max="5.0" step="0.05" value="0.0">
+
+              <div class="btn-group">
+                <button class="btn btn-secondary btn-sm" onclick="setL1Vin(0.0)">Set 0V (Bit 0)</button>
+                <button class="btn btn-secondary btn-sm" onclick="setL1Vin(0.6)">Set 0.6V (Subthreshold)</button>
+                <button class="btn btn-secondary btn-sm" onclick="setL1Vin(3.3)">Set 3.3V (Logic 1)</button>
+                <button class="btn btn-secondary btn-sm" onclick="setL1Vin(5.0)">Set 5.0V (Full Saturation)</button>
+              </div>
+            </div>
+
+            <div class="status-box" id="l1-status-box">
+              <div class="status-row"><span>Transistor State:</span> <strong id="l1-bjt-state">CUT-OFF (Switch
+                  Open)</strong></div>
+              <div class="status-row"><span>Collector Current \(I_C\):</span> <strong id="l1-ic-val">0.00 mA</strong>
+              </div>
+              <div class="status-row"><span>Classical Digital Bit:</span> <strong id="l1-bit-val"
+                  class="bit-badge">0</strong></div>
+            </div>
+          </div>
+
+          <!-- Circuit Diagram Visualizer Canvas -->
+          <div class="level-visual">
+            <h4>Live Semiconductor Circuit Diagram</h4>
+            <div class="canvas-wrapper">
+              <canvas id="l1-circuit-canvas" width="460" height="340"></canvas>
+            </div>
+            <div class="visual-legend">
+              <span class="legend-item"><span class="dot dot-green"></span> Current Flow</span>
+              <span class="legend-item"><span class="dot dot-yellow"></span> LED Emitting Photons</span>
+              <span class="legend-item"><span class="dot dot-blue"></span> Depletion Barrier</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEVEL 2 CONTENT -->
+      <div id="level-content-2" class="level-view card">
+        <div class="grid-2col">
+          <div class="level-theory">
+            <span class="pill-tag">Level 2: Inversion Operators</span>
+            <h3>Transistor NOT Gate vs Quantum Pauli-X Gate</h3>
+            <p>In classical electronics, an inverter (NOT gate) is achieved using a common-emitter pull-up transistor
+              circuit. In quantum computing, the bit-flip operator is the <strong>Pauli-X Gate</strong>.</p>
+
+            <div class="comparison-grid">
+              <div class="mini-card">
+                <h4>Classical RTL Inverter</h4>
+                <p>Output taken from Collector \(V_{out}\):</p>
+                <ul>
+                  <li>\(V_{in} = 0\text{V}\ (0) \implies V_{out} = 5\text{V}\ (1)\)</li>
+                  <li>\(V_{in} = 5\text{V}\ (1) \implies V_{out} \approx 0.2\text{V}\ (0)\)</li>
+                </ul>
+                <p class="note"><strong>Limitation:</strong> Operates strictly on deterministic voltage thresholds.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Quantum Pauli-X Gate</h4>
+                <p>Unitary \(2\times 2\) Hermitian matrix:</p>
+                <div class="matrix-display">
+                  \(X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\)
+                </div>
+                <ul>
+                  <li>\(X|0\rangle = |1\rangle\)</li>
+                  <li>\(X|1\rangle = |0\rangle\)</li>
+                  <li>\(X(\alpha|0\rangle + \beta|1\rangle) = \beta|0\rangle + \alpha|1\rangle\)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="interactive-controls">
+              <label>Select Input State:</label>
+              <div class="btn-group">
+                <button class="btn btn-primary" id="l2-input-0-btn" onclick="setL2Input(0)">Input Bit 0 / State
+                  |0&rang;</button>
+                <button class="btn btn-secondary" id="l2-input-1-btn" onclick="setL2Input(1)">Input Bit 1 / State
+                  |1&rang;</button>
+                <button class="btn btn-accent" id="l2-input-plus-btn" onclick="setL2Input('plus')">Input Superposition
+                  |+&rang;</button>
+              </div>
+            </div>
+
+            <div class="results-table-box">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Domain</th>
+                    <th>Input</th>
+                    <th>Transformation Operator</th>
+                    <th>Output</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Classical BJT</strong></td>
+                    <td id="l2-class-in">0V (Bit 0)</td>
+                    <td>RTL Inverter (\(V_{out} = V_{CC} - I_C R_C\))</td>
+                    <td id="l2-class-out"><span class="badge badge-success">5V (Bit 1)</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Quantum Pauli-X</strong></td>
+                    <td id="l2-quant-in">|0&rang; = [1, 0]<sup>T</sup></td>
+                    <td>Matrix Multiplication \(X \cdot |\psi\rangle\)</td>
+                    <td id="l2-quant-out"><span class="badge badge-accent">|1&rang; = [0, 1]<sup>T</sup></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="level-visual">
+            <h4>Inverter Voltage Transfer vs Quantum State Transition</h4>
+            <div class="canvas-wrapper">
+              <canvas id="l2-transfer-canvas" width="460" height="340"></canvas>
+            </div>
+            <p class="caption">Real-time VTC (Voltage Transfer Characteristic) and Bra-Ket Vector Inversion</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEVEL 3 CONTENT -->
+      <div id="level-content-3" class="level-view card">
+        <div class="grid-2col">
+          <div class="level-theory">
+            <span class="pill-tag">Level 3: Physical Bit to Quantum State</span>
+            <h3>From Macroscopic Switch to Probability Amplitudes</h3>
+            <p>A classical transistor stores a bit macroscopically: millions of electrons are either trapped (OFF) or
+              conducting (ON). In contrast, a <strong>qubit</strong> exists as a linear combination of basis vectors in
+              a complex Hilbert space \(\mathbb{C}^2\):</p>
+
+            <div class="formula-box">
+              $$|\psi\rangle = \alpha |0\rangle + \beta |1\rangle, \quad \text{with } |\alpha|^2 + |\beta|^2 = 1$$
+              <p>Where \(\alpha, \beta \in \mathbb{C}\) are <em>probability amplitudes</em>. When measured, the
+                wavefunction collapses to \(0\) with probability \(P(0) = |\alpha|^2\) and \(1\) with probability \(P(1)
+                = |\beta|^2\).</p>
+            </div>
+
+            <h4>The Hadamard Gate (\(H\)): True Quantum Superposition</h4>
+            <p>Applying the Hadamard transform maps deterministic basis states into an equal superposition:</p>
+            <div class="formula-box">
+              $$H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} \implies H|0\rangle =
+              \frac{|0\rangle + |1\rangle}{\sqrt{2}} \equiv |+\rangle$$
+              $$H(H|0\rangle) = H|+\rangle = |0\rangle \quad \text{(Wave Interference!)}$$
+            </div>
+
+            <div class="interactive-controls">
+              <label for="l3-theta-slider">Superposition Angle \(\theta\) (State Rotation): <span id="l3-theta-val"
+                  class="highlight-val">0&deg; (|0&rang;)</span></label>
+              <input type="range" id="l3-theta-slider" min="0" max="180" step="1" value="0">
+
+              <div class="btn-group">
+                <button class="btn btn-secondary btn-sm" onclick="setL3Preset(0)">Pure |0&rang;</button>
+                <button class="btn btn-primary btn-sm" onclick="setL3Preset(90)">Hadamard Superposition |+&rang;
+                  (50/50)</button>
+                <button class="btn btn-secondary btn-sm" onclick="setL3Preset(180)">Pure |1&rang;</button>
+                <button class="btn btn-accent btn-sm" onclick="applyL3HadamardAgain()">Apply 2nd H
+                  (Interference)</button>
+              </div>
+            </div>
+
+            <div class="probability-display">
+              <div class="prob-bar-container">
+                <div class="prob-label"><span>P(0) = |&alpha;|<sup>2</sup></span> <strong id="l3-p0-val">100.0%</strong>
+                </div>
+                <div class="progress-track">
+                  <div id="l3-p0-bar" class="progress-fill fill-blue" style="width: 100%;"></div>
+                </div>
+              </div>
+              <div class="prob-bar-container">
+                <div class="prob-label"><span>P(1) = |&beta;|<sup>2</sup></span> <strong id="l3-p1-val">0.0%</strong>
+                </div>
+                <div class="progress-track">
+                  <div id="l3-p1-bar" class="progress-fill fill-accent" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="level-visual">
+            <h4>Bloch Sphere Projection & Wave Amplitudes</h4>
+            <div class="canvas-wrapper">
+              <canvas id="l3-bloch-canvas" width="460" height="340"></canvas>
+            </div>
+            <div class="bloch-coords" id="l3-coords-info">
+              Vector: |\psi&rang; = 1.000|0&rang; + 0.000|1&rang; | Bloch: (&theta;=0&deg;, &phi;=0&deg;)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEVEL 4 CONTENT -->
+      <div id="level-content-4" class="level-view card">
+        <div class="grid-2col">
+          <div class="level-theory">
+            <span class="pill-tag">Level 4: Circuit Architectures</span>
+            <h3>Classical Digital Circuit vs Reversible Quantum Circuit</h3>
+            <p>To directly contrast digital logic with quantum computing, we implement the <strong>1-Bit Half
+                Adder</strong> (Sum = \(A \oplus B\), Carry = \(A \cdot B\)) through both architectures.</p>
+
+            <div class="comparison-grid">
+              <div class="mini-card">
+                <h4>Classical Transistor Half-Adder</h4>
+                <ul>
+                  <li>XOR gate (8 MOSFETs) for Sum</li>
+                  <li>AND gate (6 MOSFETs) for Carry</li>
+                  <li><strong>Irreversible:</strong> 2 inputs \(\to\) 2 outputs, but bit states merge. Original inputs
+                    cannot be recovered.</li>
+                  <li>Dissipates Landauer heat: \(Q \ge k_B T \ln 2\).</li>
+                </ul>
+              </div>
+              <div class="mini-card">
+                <h4>Quantum Reversible Half-Adder</h4>
+                <ul>
+                  <li>Preserves information via Unitary gates (\(U^\dagger U = I\))</li>
+                  <li>CNOT gates compute Sum without erasing inputs</li>
+                  <li>Toffoli (CCX) gate computes Carry reversibly</li>
+                  <li>Supports <strong>Quantum Parallelism</strong>: evaluate all 4 input pairs simultaneously in
+                    superposition!</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="interactive-controls">
+              <label>Select Inputs (A, B):</label>
+              <div class="btn-group">
+                <button class="btn btn-secondary btn-sm l4-in-btn" onclick="setL4Inputs(0, 0)">A=0, B=0</button>
+                <button class="btn btn-secondary btn-sm l4-in-btn" onclick="setL4Inputs(0, 1)">A=0, B=1</button>
+                <button class="btn btn-secondary btn-sm l4-in-btn" onclick="setL4Inputs(1, 0)">A=1, B=0</button>
+                <button class="btn btn-secondary btn-sm l4-in-btn" onclick="setL4Inputs(1, 1)">A=1, B=1</button>
+                <button class="btn btn-accent btn-sm l4-in-btn" onclick="setL4Superposition()">Superposition (All 4 at
+                  once!)</button>
+              </div>
+            </div>
+
+            <div class="status-box" id="l4-status-box">
+              <div class="status-row"><span>Inputs:</span> <strong id="l4-inputs-disp">A = 0, B = 0</strong></div>
+              <div class="status-row"><span>Classical Outputs:</span> <strong id="l4-class-out-disp">Sum = 0, Carry =
+                  0</strong></div>
+              <div class="status-row"><span>Quantum Register:</span> <strong id="l4-quant-out-disp">|A, B, Sum,
+                  Carry&rang; = |0000&rang; (100%)</strong></div>
+            </div>
+          </div>
+
+          <div class="level-visual">
+            <h4>Dual Circuit Topology Comparison</h4>
+            <div class="canvas-wrapper">
+              <canvas id="l4-circuit-canvas" width="460" height="340"></canvas>
+            </div>
+            <p class="caption">Top: Classical CMOS Gate Network | Bottom: Quantum Reversible Circuit</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 2: MODULE A - TRANSISTOR SIMULATOR -->
+    <!-- =================================================================== -->
+    <section id="tab-module-a" class="tab-pane">
+      <div class="section-intro">
+        <h2>Module A: Transistor Semiconductor Switch Lab</h2>
+        <p>Explore the electronic switching physics: Base/Gate voltage, Collector/Drain current, switching threshold,
+          and load line analysis.</p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <h3>Transistor Parameter Controls</h3>
+
+          <div class="control-slider-group">
+            <label for="ma-vbe">Base-Emitter Voltage \(V_{BE}\) / Gate Voltage \(V_{GS}\): <span id="ma-vbe-val"
+                class="highlight-val">0.75 V</span></label>
+            <input type="range" id="ma-vbe" min="0" max="3.0" step="0.02" value="0.75">
+          </div>
+
+          <div class="control-slider-group">
+            <label for="ma-vth">Switching Threshold Voltage \(V_{th}\): <span id="ma-vth-val" class="highlight-val">0.70
+                V</span></label>
+            <input type="range" id="ma-vth" min="0.4" max="1.5" step="0.05" value="0.70">
+          </div>
+
+          <div class="control-slider-group">
+            <label for="ma-rl">Load Resistor \(R_L\) / Pull-Up \(R_C\): <span id="ma-rl-val" class="highlight-val">1000
+                &Omega;</span></label>
+            <input type="range" id="ma-rl" min="200" max="5000" step="100" value="1000">
+          </div>
+
+          <div class="control-slider-group">
+            <label for="ma-vcc">Supply Voltage \(V_{CC}\): <span id="ma-vcc-val" class="highlight-val">5.0
+                V</span></label>
+            <input type="range" id="ma-vcc" min="3.0" max="12.0" step="0.5" value="5.0">
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <span class="m-label">Operating Region</span>
+              <span class="m-val" id="ma-region-val">Active</span>
+            </div>
+            <div class="metric-card">
+              <span class="m-label">Collector Current \(I_C\)</span>
+              <span class="m-val" id="ma-ic-val">3.2 mA</span>
+            </div>
+            <div class="metric-card">
+              <span class="m-label">Output Voltage \(V_{CE}\)</span>
+              <span class="m-val" id="ma-vce-val">1.8 V</span>
+            </div>
+            <div class="metric-card">
+              <span class="m-label">LED Status</span>
+              <span class="m-val" id="ma-led-val">ON (Bright)</span>
+            </div>
+          </div>
+
+          <div class="alert-box">
+            <strong>Key Concept for Quantum Bridging:</strong> In digital computing, we intentionally overdrive the
+            transistor into saturation (\(V_{CE} \approx 0.2\text{V}\)) or cut-off (\(V_{CE} = V_{CC}\)) to reject
+            analog noise and establish a binary bit. In quantum computing, intermediate states are preserved!
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Output Characteristics (\(I_C\) vs \(V_{CE}\)) & Load Line</h3>
+          <div class="canvas-wrapper">
+            <canvas id="ma-iv-canvas" width="460" height="340"></canvas>
+          </div>
+          <p class="caption">Red Line: DC Load Line | Blue Curve: Characteristic IV Curve | Yellow Dot: Q-point</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 3: MODULE B - LOGIC GATE SIMULATOR -->
+    <!-- =================================================================== -->
+    <section id="tab-module-b" class="tab-pane">
+      <div class="section-intro">
+        <h2>Module B: Logic Gate & Transistor Topology Simulator</h2>
+        <p>Interactive classical logic gates (NOT, AND, OR, NAND, NOR, XOR) with live truth tables and transistor-level
+          topologies.</p>
+      </div>
+
+      <div class="gate-selector-bar">
+        <button class="gate-btn active" data-gate="NOT">NOT (Inverter)</button>
+        <button class="gate-btn" data-gate="AND">AND Gate</button>
+        <button class="gate-btn" data-gate="OR">OR Gate</button>
+        <button class="gate-btn" data-gate="NAND">NAND (Universal)</button>
+        <button class="gate-btn" data-gate="NOR">NOR (Universal)</button>
+        <button class="gate-btn" data-gate="XOR">XOR Gate</button>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <h3 id="mb-gate-title">NOT Gate (Inverter)</h3>
+          <p id="mb-gate-desc">The basic building block of digital logic. Converts 0 to 1 and 1 to 0.</p>
+
+          <div class="gate-inputs-interactive">
+            <div class="input-toggle">
+              <label>Input A:</label>
+              <button id="mb-btn-a" class="btn btn-secondary bit-toggle-btn" onclick="toggleGateInput('A')">0</button>
+            </div>
+            <div class="input-toggle" id="mb-input-b-container">
+              <label>Input B:</label>
+              <button id="mb-btn-b" class="btn btn-secondary bit-toggle-btn" onclick="toggleGateInput('B')">0</button>
+            </div>
+            <div class="output-display">
+              <label>Output Y:</label>
+              <span id="mb-gate-out" class="bit-badge badge-active">1</span>
+            </div>
+          </div>
+
+          <h4>Truth Table</h4>
+          <div class="table-responsive">
+            <table class="data-table" id="mb-truth-table">
+              <!-- Dynamically populated -->
+            </table>
+          </div>
+
+          <div class="transistor-topology-notes">
+            <h4>Transistor-Level Construction</h4>
+            <p id="mb-topology-text">Built from 1 NPN transistor in common-emitter configuration with a pull-up
+              collector resistor.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Transistor-Level Schematic</h3>
+          <div class="canvas-wrapper">
+            <canvas id="mb-schematic-canvas" width="460" height="340"></canvas>
+          </div>
+          <p class="caption">Live current animation based on switch state</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 4: MODULE C - QUANTUM SIMULATOR -->
+    <!-- =================================================================== -->
+    <section id="tab-module-c" class="tab-pane">
+      <div class="section-intro">
+        <h2>Module C: Interactive Quantum State & Gate Simulator</h2>
+        <p>Interactive single & two-qubit quantum simulator with statevectors, Bloch sphere representation, and
+          1024-shot Monte Carlo measurement.</p>
+      </div>
+
+      <div class="grid-3col">
+        <!-- Column 1: Gate Library & Circuit -->
+        <div class="card">
+          <h3>Quantum Gates</h3>
+          <p>Click gates to apply to Qubit 0:</p>
+          <div class="quantum-gate-palette">
+            <button class="q-btn" onclick="applyQuantumGate('X')">X (Pauli-X / Bit Flip)</button>
+            <button class="q-btn" onclick="applyQuantumGate('H')">H (Hadamard / Superposition)</button>
+            <button class="q-btn" onclick="applyQuantumGate('Z')">Z (Pauli-Z / Phase Flip)</button>
+            <button class="q-btn" onclick="applyQuantumGate('Y')">Y (Pauli-Y Gate)</button>
+            <button class="q-btn" onclick="applyQuantumGate('S')">S (Phase &pi;/2)</button>
+            <button class="q-btn btn-danger" onclick="resetQuantumCircuit()">Reset to |0&rang;</button>
+          </div>
+
+          <h4>Circuit History</h4>
+          <div id="qc-gate-sequence" class="circuit-wire">
+            <span class="qubit-label">q[0]: |0&rang;</span>
+            <span class="wire-line"></span>
+          </div>
+
+          <div class="measurement-trigger">
+            <button class="btn btn-accent btn-block" onclick="run1024Shots()">🎲 Run 1024 Shots Measurement</button>
+          </div>
+        </div>
+
+        <!-- Column 2: Statevector & Amplitudes -->
+        <div class="card">
+          <h3>Statevector & Complex Amplitudes</h3>
+          <div class="formula-box">
+            <div id="mc-ket-str" class="ket-big">|\psi\rangle = 1.000|0\rangle + 0.000|1\rangle</div>
+          </div>
+
+          <div class="amplitude-details">
+            <div class="amp-row">
+              <span>&alpha; (|0&rang; amplitude):</span>
+              <strong id="mc-alpha-val">1.000 + 0.000i</strong>
+            </div>
+            <div class="amp-row">
+              <span>&beta; (|1&rang; amplitude):</span>
+              <strong id="mc-beta-val">0.000 + 0.000i</strong>
+            </div>
+            <div class="amp-row">
+              <span>Relative Phase &phi;:</span>
+              <strong id="mc-phase-val">0.0&deg;</strong>
+            </div>
+          </div>
+
+          <h4>Measurement Probabilities</h4>
+          <div class="probability-display">
+            <div class="prob-bar-container">
+              <div class="prob-label"><span>P(|0&rang;) = |&alpha;|<sup>2</sup></span> <strong
+                  id="mc-p0-pct">100.0%</strong></div>
+              <div class="progress-track">
+                <div id="mc-p0-bar" class="progress-fill fill-blue" style="width: 100%;"></div>
+              </div>
+            </div>
+            <div class="prob-bar-container">
+              <div class="prob-label"><span>P(|1&rang;) = |&beta;|<sup>2</sup></span> <strong
+                  id="mc-p1-pct">0.0%</strong></div>
+              <div class="progress-track">
+                <div id="mc-p1-bar" class="progress-fill fill-accent" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <h4>1024-Shot Measurement Histogram</h4>
+          <div class="canvas-wrapper-sm">
+            <canvas id="mc-hist-canvas" width="300" height="150"></canvas>
+          </div>
+        </div>
+
+        <!-- Column 3: Bloch Sphere -->
+        <div class="card">
+          <h3>Bloch Sphere</h3>
+          <div class="canvas-wrapper">
+            <canvas id="mc-bloch-canvas" width="300" height="300"></canvas>
+          </div>
+          <div class="bloch-angles">
+            <span>&theta; = <strong id="mc-theta-angle">0.0&deg;</strong></span> |
+            <span>&phi; = <strong id="mc-phi-angle">0.0&deg;</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 5: MODULE D - COMPARISON DASHBOARD -->
+    <!-- =================================================================== -->
+    <section id="tab-module-d" class="tab-pane">
+      <div class="section-intro">
+        <h2>Module D: Side-by-Side Comparison Dashboard</h2>
+        <p>A comprehensive side-by-side mapping matrix comparing semiconductor electronics and quantum computing
+          domains.</p>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="data-table comparison-matrix-table">
+            <thead>
+              <tr>
+                <th style="width: 18%;">Dimension</th>
+                <th style="width: 41%;">Classical Semiconductor Domain</th>
+                <th style="width: 41%;">Quantum Information Domain</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Fundamental Unit</strong></td>
+                <td><strong>Classical Bit (\(b \in \{0, 1\}\))</strong><br>Physical state: charge in capacitor or
+                  saturated transistor.</td>
+                <td><strong>Qubit (\(|\psi\rangle = \alpha|0\rangle + \beta|1\rangle\))</strong><br>Unit vector in 2D
+                  complex Hilbert space \(\mathbb{C}^2\).</td>
+              </tr>
+              <tr>
+                <td><strong>2. State Space</strong></td>
+                <td><strong>Discrete Binary (\(\{0, 1\}\))</strong><br>Either 0V or 5V. Voltage levels between are
+                  invalid/metastable.</td>
+                <td><strong>Continuous Bloch Sphere Surface</strong><br>Infinite continuum of superposition states with
+                  relative phase \(\phi\).</td>
+              </tr>
+              <tr>
+                <td><strong>3. Basic Inverter</strong></td>
+                <td><strong>Transistor NOT Gate</strong><br>RTL inverter: High input turns BJT ON, grounding output to
+                  0V.</td>
+                <td><strong>Pauli-X Gate</strong><br>Unitary bit-flip matrix \(X = \begin{pmatrix} 0 & 1 \\ 1 & 0
+                  \end{pmatrix}\), inverts superpositions linearly.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Gate Operation</strong></td>
+                <td><strong>Boolean Logic Operations (AND, OR, NAND)</strong><br>Dissipative, irreversible, erases input
+                  bits (Landauer loss).</td>
+                <td><strong>Unitary Transformations (\(U^\dagger U = I\))</strong><br>Reversible, norm-preserving,
+                  preserves quantum phase information.</td>
+              </tr>
+              <tr>
+                <td><strong>5. Reading / Output</strong></td>
+                <td><strong>Deterministic Voltage Probe</strong><br>Non-destructive: reading the voltage does not alter
+                  the stored bit. Copying allowed (fan-out).</td>
+                <td><strong>Wavefunction Collapse (Born Rule)</strong><br>Destructive projective measurement collapses
+                  \(|\psi\rangle\) to \(0\) or \(1\). Cloning forbidden (No-Cloning Theorem).</td>
+              </tr>
+              <tr>
+                <td><strong>6. Noise Phenomenon</strong></td>
+                <td><strong>Additive Voltage Fluctuations (\(V_{ideal} + n(t)\))</strong><br>Thermal/Johnson noise.
+                  Filtered by non-linear saturation margins.</td>
+                <td><strong>Decoherence & Phase Randomization</strong><br>Environment entangles with qubit. Bit flips,
+                  phase flips (\(Z\)), depolarizing noise.</td>
+              </tr>
+              <tr>
+                <td><strong>7. Scaling Power</strong></td>
+                <td><strong>Linear Scaling (\(N\) bits = \(N\) values)</strong><br>Processes one \(N\)-bit state at any
+                  given clock cycle.</td>
+                <td><strong>Exponential State Space (\(2^N\) Amplitudes)</strong><br>\(N\) entangled qubits encode
+                  \(2^N\) complex amplitudes simultaneously.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 6: NOISE & ERROR CORRECTION -->
+    <!-- =================================================================== -->
+    <section id="tab-noise" class="tab-pane">
+      <div class="section-intro">
+        <h2>Noise & Quantum Error Correction (QEC) Laboratory</h2>
+        <p>Explore classical additive voltage jitter vs quantum decoherence and witness the 3-Qubit Bit-Flip Repetition
+          Code in action.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Classical Noise Section -->
+        <div class="card">
+          <h3>Classical Noise: \(V_{out} = V_{ideal} + n(t)\)</h3>
+          <p>In digital electronics, small Gaussian thermal noise is naturally restored by the transistor's non-linear
+            voltage transfer curve. However, large noise pulses can breach the noise margin threshold (\(V_{IL}\) /
+            \(V_{IH}\)) and trigger a false bit flip.</p>
+
+          <div class="control-slider-group">
+            <label for="noise-sigma-slider">Gaussian Noise Standard Deviation (\(\sigma\)): <span id="noise-sigma-val"
+                class="highlight-val">0.60 V</span></label>
+            <input type="range" id="noise-sigma-slider" min="0.0" max="2.0" step="0.05" value="0.60">
+          </div>
+
+          <div class="control-slider-group">
+            <label for="noise-ideal-select">Nominal Output Voltage (\(V_{ideal}\)):</label>
+            <select id="noise-ideal-select" class="form-select">
+              <option value="5.0">Logic HIGH (5.0V / Bit 1)</option>
+              <option value="0.2">Logic LOW (0.2V / Bit 0)</option>
+            </select>
+          </div>
+
+          <div class="canvas-wrapper">
+            <canvas id="noise-scope-canvas" width="460" height="220"></canvas>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <span class="m-label">Simulated Samples</span>
+              <span class="m-val" id="noise-samples-cnt">10,000</span>
+            </div>
+            <div class="metric-card">
+              <span class="m-label">Bit Flip Errors</span>
+              <span class="m-val" id="noise-errors-cnt">0</span>
+            </div>
+            <div class="metric-card">
+              <span class="m-label">Bit Error Rate (BER)</span>
+              <span class="m-val" id="noise-ber-val">0.00 %</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quantum Noise & QEC Section -->
+        <div class="card">
+          <h3>Quantum Error Correction: 3-Qubit Bit-Flip Code</h3>
+          <p>Quantum noise can flip a bit (\(X\)) or flip a phase (\(Z\)). Because the <strong>No-Cloning
+              Theorem</strong> forbids copying unknown states, we encode \(|\psi\rangle = \alpha|0\rangle +
+            \beta|1\rangle\) into an entangled logical subspace:</p>
+          <div class="formula-box">
+            $$|\psi_L\rangle = \alpha |000\rangle + \beta |111\rangle$$
+            <p>Syndrome ancillas measure parities (\(q_0 \oplus q_1\) and \(q_1 \oplus q_2\)) without measuring
+              \(\alpha\) or \(\beta\), preserving the superposition!</p>
+          </div>
+
+          <div class="qec-interactive-panel">
+            <label>Inject Bit-Flip Error (\(X\)) on:</label>
+            <div class="btn-group">
+              <button class="btn btn-secondary qec-err-btn" onclick="runQECSimulation(-1)">No Error</button>
+              <button class="btn btn-danger qec-err-btn" onclick="runQECSimulation(0)">Qubit 0 Flip</button>
+              <button class="btn btn-danger qec-err-btn" onclick="runQECSimulation(1)">Qubit 1 Flip</button>
+              <button class="btn btn-danger qec-err-btn" onclick="runQECSimulation(2)">Qubit 2 Flip</button>
+            </div>
+
+            <div class="canvas-wrapper-sm">
+              <canvas id="qec-circuit-canvas" width="460" height="180"></canvas>
+            </div>
+
+            <div class="status-box" id="qec-results-box">
+              <div class="status-row"><span>Syndrome Measurement \([s_1, s_0]\):</span> <strong id="qec-syn-val">00 (No
+                  error)</strong></div>
+              <div class="status-row"><span>Correction Applied:</span> <strong id="qec-action-val">None needed</strong>
+              </div>
+              <div class="status-row"><span>Logical Fidelity:</span> <strong id="qec-fidelity-val"
+                  class="badge badge-success">100.0% Restored</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conceptual Noise Comparison Q&A -->
+      <div class="card mt-4">
+        <h3>Conceptual Comparison: Classical vs Quantum Noise</h3>
+        <div class="qa-item">
+          <h4 class="qa-q">&ldquo;How does classical noise in transistor-based switching compare conceptually with noise
+            affecting quantum states?&rdquo;</h4>
+          <div class="qa-a">
+            <p>In classical semiconductor systems, information is stored as macroscopic charges or voltages ($V_{out} =
+              V_{ideal} + n(t)$). Transistors have steep, non-linear voltage transfer characteristics that produce
+              <strong>noise margins</strong> ($V_{IL}$ and $V_{IH}$). Any thermal noise jitter smaller than these
+              margins is actively restored and suppressed by each succeeding logic gate. Errors only occur if noise
+              causes a macroscopic discrete threshold breach.</p>
+            <p>In contrast, quantum states exist as delicate linear combinations of complex probability amplitudes in
+              Hilbert space ($|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$). Quantum noise (such as phase damping,
+              thermal relaxation $T_1$, and dephasing $T_2$) continuously perturbs the phase and amplitudes through
+              environmental entanglement. Because of the <strong>No-Cloning Theorem</strong>, intermediate quantum
+              amplitudes cannot be amplified or copied to restore their signal. To protect quantum information, quantum
+              error correction must detect error syndromes through <em>entangled parity measurements</em> that identify
+              which error occurred without ever measuring the underlying quantum data itself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 7: EVALUATION & ASSESSMENTS -->
+    <!-- =================================================================== -->
+    <section id="tab-evaluation" class="tab-pane">
+      <div class="section-intro">
+        <h2>Pedagogical Evaluation & Learning Gain</h2>
+        <p>Pre-Test and Post-Test conceptual assessments (10 MCQs each) with automated scoring and Hake's normalized
+          learning gain (\(g\)) calculation.</p>
+      </div>
+
+      <div class="eval-nav-pills">
+        <button class="eval-pill active" data-eval="pre">Pre-Test (Baseline Assessment)</button>
+        <button class="eval-pill" data-eval="post">Post-Test (Post-Instruction)</button>
+        <button class="eval-pill" data-eval="rubric">Circuit Implementation Rubric</button>
+      </div>
+
+      <!-- PRE-TEST CONTAINER -->
+      <div id="eval-pre-pane" class="eval-pane active card">
+        <div class="eval-header-bar">
+          <h3>Pre-Test: Conceptual Baseline Assessment</h3>
+          <span class="badge badge-primary">10 Multiple Choice Questions</span>
+        </div>
+        <form id="pre-test-form">
+          <div id="pre-test-questions" class="questions-list"></div>
+          <button type="button" class="btn btn-primary mt-3" onclick="submitPreTest()">Submit Pre-Test & Save
+            Baseline</button>
+        </form>
+        <div id="pre-score-display" class="score-display-box" style="display: none;"></div>
+      </div>
+
+      <!-- POST-TEST CONTAINER -->
+      <div id="eval-post-pane" class="eval-pane card">
+        <div class="eval-header-bar">
+          <h3>Post-Test: Comprehensive Conceptual Assessment</h3>
+          <span class="badge badge-accent">10 Multiple Choice Questions</span>
+        </div>
+        <form id="post-test-form">
+          <div id="post-test-questions" class="questions-list"></div>
+          <button type="button" class="btn btn-accent mt-3" onclick="submitPostTest()">Submit Post-Test & Calculate
+            Learning Gain</button>
+        </form>
+        <div id="post-score-display" class="score-display-box" style="display: none;"></div>
+
+        <!-- Normalized Gain Metric Display -->
+        <div id="learning-gain-box" class="gain-box" style="display: none;">
+          <h3>Hake's Normalized Learning Gain (\(g\))</h3>
+          <div class="formula-box">
+            $$g = \frac{\text{Post\%} - \text{Pre\%}}{100\% - \text{Pre\%}}$$
+          </div>
+          <div class="gain-metrics">
+            <div class="metric-card"><span class="m-label">Pre-Test Score</span><span class="m-val"
+                id="gain-pre-val">--</span></div>
+            <div class="metric-card"><span class="m-label">Post-Test Score</span><span class="m-val"
+                id="gain-post-val">--</span></div>
+            <div class="metric-card"><span class="m-label">Absolute Gain</span><span class="m-val"
+                id="gain-abs-val">--</span></div>
+            <div class="metric-card"><span class="m-label">Normalized Gain (\(g\))</span><span class="m-val"
+                id="gain-hake-val">--</span></div>
+          </div>
+          <div class="gain-interpretation" id="gain-interp-val"></div>
+        </div>
+      </div>
+
+      <!-- RUBRIC & TASKS CONTAINER -->
+      <div id="eval-rubric-pane" class="eval-pane card">
+        <h3>Circuit Implementation Tasks & Conceptual Understanding Rubric</h3>
+        <p>Standardized evaluation criteria for university laboratory viva and assessment.</p>
+
+        <h4>Laboratory Practical Tasks</h4>
+        <ol class="task-list">
+          <li><strong>Task 1 (Physical Semiconductor Switch):</strong> Wire a 2N2222 NPN BJT switch on a breadboard.
+            Sweep the base voltage from 0V to 5V and record the collector cutoff-to-saturation threshold using Arduino
+            ADC pin A1.</li>
+          <li><strong>Task 2 (RTL Inverter vs Pauli-X):</strong> Measure the output of an RTL logic inverter. Verify
+            that it maps \(0\text{V} \to 5\text{V}\) and \(5\text{V} \to 0.15\text{V}\). Execute the corresponding
+            Pauli-X quantum circuit in Qiskit and explain why \(X\) can operate on superpositions while the BJT cannot.
+          </li>
+          <li><strong>Task 3 (Quantum Superposition & Wave Interference):</strong> Construct a circuit with a single
+            Hadamard gate on Qiskit Aer (1024 shots) to observe a 50/50 probability distribution. Then add a second
+            consecutive Hadamard gate and verify constructive interference on \(|0\rangle\).</li>
+          <li><strong>Task 4 (Noise & Repetition Code):</strong> Inject a bit-flip error into the 3-qubit repetition
+            circuit. Measure the parity syndrome and demonstrate state recovery without measuring data qubits.</li>
+        </ol>
+
+        <h4>Academic Evaluation Rubric</h4>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Criterion</th>
+                <th>Exemplary (90-100%)</th>
+                <th>Proficient (70-89%)</th>
+                <th>Developing (50-69%)</th>
+                <th>Unsatisfactory (<50%)< /th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Semiconductor Concepts</strong></td>
+                <td>Flawlessly calculates BJT cut-off, active, and saturation states, load line Q-point, and explains
+                  RTL inversion.</td>
+                <td>Correctly describes BJT switching and threshold conditions with minor mathematical inaccuracies.
+                </td>
+                <td>Identifies ON/OFF states but struggles to explain base resistor sizing or saturation voltage.</td>
+                <td>Unable to explain transistor operation as a switch.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Quantum Mapping</strong></td>
+                <td>Deeply articulates the mapping from voltage levels to complex statevectors, Pauli-X, and Hadamard
+                  superposition.</td>
+                <td>Accurately maps bits to qubits and NOT to Pauli-X; basic explanation of Hadamard.</td>
+                <td>Superficial understanding of qubits as probabilistic classical bits without phase awareness.</td>
+                <td>Confuses classical probabilities with quantum amplitudes.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Noise & QEC Understanding</strong></td>
+                <td>Masterfully contrasts classical noise margins with quantum decoherence, No-Cloning theorem, and
+                  syndrome parity.</td>
+                <td>Explains bit-flip errors and syndrome measurement; understands classical Gaussian noise.</td>
+                <td>Describes 3-qubit code as simple classical voting without recognizing why direct measurement
+                  collapses state.</td>
+                <td>Cannot differentiate between classical thermal noise and quantum phase noise.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Hands-on Execution</strong></td>
+                <td>Successfully executes physical Arduino bench, runs all Qiskit scripts with zero errors, and utilizes
+                  simulator tools.</td>
+                <td>Executes hardware and Qiskit simulations with minor guidance.</td>
+                <td>Partial completion of breadboard circuit or simulation scripts.</td>
+                <td>Fails to run hardware circuit or simulation scripts.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; University Department of Computer Science & Engineering | "From Transistors to Qubits" Learning
+        Framework</p>
+      <p class="footer-sub">Interactive simulator engine powered by HTML5, JavaScript Canvas, and Qiskit / NumPy
+        companion suite.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
